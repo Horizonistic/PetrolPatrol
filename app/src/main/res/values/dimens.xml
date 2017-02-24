@@ -1,0 +1,25 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">0dp</dimen>
+    <dimen name="activity_vertical_margin">0dp</dimen>
+
+    <!--
+        Main view-->
+    <dimen name="option_font_size">10pt</dimen>
+    <dimen name="button_padding">0px</dimen>
+
+    <!--
+        Add entry-->
+    <dimen name="checkmark_side">100px</dimen>
+
+    <!--
+        View entries-->
+    <dimen name="list_top_padding">50px</dimen>
+    <dimen name="header_font_size">4pt</dimen>
+    <dimen name="subitems_font_size">3.1pt</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+</resources>

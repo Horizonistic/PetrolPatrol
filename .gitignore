@@ -1,0 +1,8 @@
+/.gradle
+/.git
+/.idea
+/.navigation
+/build
+*.iml
+local.properties
+/captures
