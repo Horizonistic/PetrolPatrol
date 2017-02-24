@@ -109,13 +109,14 @@ public class ViewEntries extends AppCompatActivity
                         if (event.getAction() == MotionEvent.ACTION_DOWN)
                         {
                             layout.setBackgroundColor(colorGrayHighlight);
-                            return true;
+                            return false;
                         }
-                        else
+                        else if (event.getAction() == MotionEvent.ACTION_UP)
                         {
                             layout.setBackgroundColor(colorPrimaryBackground);
-                            return true;
+                            return false;
                         }
+                        return true;
                     }
                 });
 
@@ -201,6 +202,7 @@ public class ViewEntries extends AppCompatActivity
         @Override
         public boolean onLongClick(View v)
         {
+            Log.wtf(ViewEntries.TAG, "Uhm, yeah");
             // TODO: Add an edit option
             AlertDialog dialog = new AlertDialog.Builder(ViewEntries.this).create();
             dialog.setTitle(R.string.delete_entry_title);
