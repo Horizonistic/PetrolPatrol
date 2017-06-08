@@ -1,4 +1,4 @@
-#Petrol Patrol
+###Petrol Patrol
 
 Petrol Patrol is an Android app designed to help you keep track of all those numbers you get when you top off your car.
 
