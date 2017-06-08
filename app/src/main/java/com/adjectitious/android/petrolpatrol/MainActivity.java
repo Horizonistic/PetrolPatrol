@@ -41,12 +41,6 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void viewTabbed(View view)
-    {
-        Intent intent = new Intent(this, Tabbed.class);
-        startActivity(intent);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {

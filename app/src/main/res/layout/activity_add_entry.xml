@@ -18,7 +18,6 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:textAlignment="center"
-        android:singleLine="false"
         android:maxLines="5"
         android:visibility="gone" />
 
@@ -113,6 +112,8 @@
     <Button android:id="@+id/add_entry_submit_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryLight"
+        android:textColor="@color/white"
         android:text="@string/add_entry_submit_button"
         android:onClick="submitEntry" />
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -16,39 +16,38 @@
         layout="@layout/main_toolbar"/>
 
     <Button android:id="@+id/option_add_entry"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10px"
-            android:layout_marginBottom="10px"
-            android:layout_below="@+id/main_toolbar"
-            android:layout_width="200dp"
-            android:layout_height="75dp"
-            android:background="@color/buttonAddEntry"
+            android:drawableBottom="@color/black"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
             android:textSize="@dimen/option_font_size"
             android:text="@string/option_add_entry"
             android:onClick="addEntry"
-            style="?android:attr/borderlessButtonStyle" />
+            style="?android:attr/segmentedButtonStyle" />
 
     <Button android:id="@+id/option_view_entries"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="10px"
-            android:layout_below="@+id/option_add_entry"
-            android:layout_width="200dp"
-            android:layout_height="75dp"
-            android:background="@color/buttonViewEntry"
+            android:layout_marginBottom="0dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
             android:textSize="@dimen/option_font_size"
             android:text="@string/option_view_entries"
             android:onClick="viewEntries"
-            style="?android:attr/borderlessButtonStyle"/>
+            style="?android:attr/segmentedButtonStyle"/>
 
-    <Button android:id="@+id/option_view_tabbed"
-            android:layout_centerInParent="true"
-            android:layout_below="@+id/option_view_entries"
-            android:layout_width="200dp"
-            android:layout_height="75dp"
-            android:background="@color/buttonViewEntry"
+    <Button android:id="@+id/option_change_car"
+            android:layout_marginBottom="0dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
             android:textSize="@dimen/option_font_size"
-            android:text="Tabbed"
-            android:onClick="viewTabbed"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:text="@string/option_switch_cars"
+            android:onClick="switchCars"
+            style="?android:attr/segmentedButtonStyle"/>
 
-</RelativeLayout>
+</LinearLayout>

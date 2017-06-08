@@ -23,11 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-// TODO: Add option to see entries (or am using tab system?)
+// TODO: Add option to see entries
 // TODO: Implement max limit?  Or some performance control
 public class AddEntry extends AppCompatActivity
 {
-
     private static final String TAG = "AddEntry";
 
     @Override
@@ -36,6 +35,7 @@ public class AddEntry extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        mainToolbar.setTitle(getString(R.string.add_entry_title));
         setSupportActionBar(mainToolbar);
 
         // Autofills date by default

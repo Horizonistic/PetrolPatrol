@@ -43,6 +43,7 @@ public class ViewEntries extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_entries);
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        mainToolbar.setTitle(getString(R.string.view_entries_title));
         setSupportActionBar(mainToolbar);
         this.context = getApplicationContext();
         viewAll();

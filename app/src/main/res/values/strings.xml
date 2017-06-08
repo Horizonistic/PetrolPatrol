@@ -5,11 +5,13 @@
     <string name="app_name">Petrol Patrol</string>
     <string name="option_add_entry">Add Entry</string>
     <string name="option_view_entries">View Entries</string>
+    <string name="option_switch_cars">Switch Cars</string>
     <string name="more">More</string>
 
     <!--
         Add entry
     -->
+    <string name="add_entry_title">Add Entry</string>
     <string name="text_date_error">Empty date</string>
     <string name="text_name_error">Empty name</string>
     <string name="text_price_error">Empty price</string>
@@ -42,12 +44,13 @@
     <!--
         View Entries
     -->
+    <string name="view_entries_title">View Entries</string>
     <string name="text_liquid_unit">gal</string>
     <string name="text_distance_unit">mi</string>
     <string name="button_delete_entry">Delete Entry</string>
 
     <string name="text_newline">\n</string>
-    <string name="confirm">Confirm</string>
+    <string name="confirm">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="delete_entry_prompt">Are you sure you want to delete this entry?</string>
     <string name="delete_entry_title">Delete?</string>
