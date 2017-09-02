@@ -25,6 +25,20 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <Spinner android:id="@+id/spinner_car"
+                 android:layout_width="fill_parent"
+                 android:layout_weight="1"
+                 android:layout_height="50dp"
+                 android:layout_gravity="center_vertical"
+                 android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <EditText android:id="@+id/text_date_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -52,12 +66,13 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="191px"
         android:orientation="horizontal">
+
         <Spinner android:id="@+id/spinner_name"
             android:layout_width="fill_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:visibility="visible" />
 

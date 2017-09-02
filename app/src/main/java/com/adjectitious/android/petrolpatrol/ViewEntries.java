@@ -21,7 +21,6 @@ import com.adjectitious.android.petrolpatrol.sql.*;
 
 import java.text.DecimalFormat;
 
-// TODO: Add option to add entry (or am using tab system?)
 // TODO: Implement pagination to prevent too long a list
 // TODO: Implement sorting view calender
 // TODO: Implement sorting via different stats
@@ -46,7 +45,7 @@ public class ViewEntries extends AppCompatActivity
         mainToolbar.setTitle(getString(R.string.view_entries_title));
         setSupportActionBar(mainToolbar);
         this.context = getApplicationContext();
-        viewAll();
+        this.viewAll();
     }
 
     @Override
@@ -56,22 +55,34 @@ public class ViewEntries extends AppCompatActivity
 
         this.dbHelper.close();
         this.db.close();
-        this.cursor.close();
+        // todo: figure out for to check if null
+        if (this.cursor != null)
+        {
+            this.cursor.close();
+        }
     }
 
     public void viewAll()
     {
         this.dbHelper = new DatabaseHelper(getApplicationContext());
         this.db = this.dbHelper.getWritableDatabase();
-        this.cursor = this.db.query(
-                DatabaseContract.gasTable.TABLE_NAME,               // The table to query
-                null,                                               // The columns to return
-                null,                                               // The columns for the WHERE clause
-                null,                                               // The values for the WHERE clause
-                null,                                               // don't group the rows
-                null,                                               // don't filter by row groups
-                null                                                // The sort order
-        );
+        if (dbHelper.doesTableExist(db, DatabaseContract.gasTable.TABLE_NAME))
+        {
+            this.cursor = this.db.query(
+                    DatabaseContract.gasTable.TABLE_NAME,               // The table to query
+                    null,                                               // The columns to return
+                    null,                                               // The columns for the WHERE clause
+                    null,                                               // The values for the WHERE clause
+                    null,                                               // don't group the rows
+                    null,                                               // don't filter by row groups
+                    null                                                // The sort order
+            );
+        }
+        else
+        {
+            Log.e(TAG, "Empty fillup table");
+            return;
+        }
 
         final int colorBlack;
         final int colorGrayHighlight;
@@ -183,8 +194,6 @@ public class ViewEntries extends AppCompatActivity
                 this.cursor.moveToNext();
             }
         }
-
-        return;
     }
 
     private class DeleteOnLongClickListener implements View.OnLongClickListener
@@ -203,7 +212,7 @@ public class ViewEntries extends AppCompatActivity
         @Override
         public boolean onLongClick(View v)
         {
-            Log.wtf(ViewEntries.TAG, "Uhm, yeah");
+            Log.d(ViewEntries.TAG, "onLongClick");
             // TODO: Add an edit option
             AlertDialog dialog = new AlertDialog.Builder(ViewEntries.this).create();
             dialog.setTitle(R.string.delete_entry_title);

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.adjectitious.android.petrolpatrol.SwitchCars"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/main_toolbar"
+        layout="@layout/main_toolbar"/>
+
+    <TextView android:id="@+id/text_fields_errors"
+              android:layout_width="fill_parent"
+              android:layout_height="match_parent"
+              android:textAlignment="center"
+              android:maxLines="5"
+              android:visibility="gone" />
+
+    <RelativeLayout android:id="@+id/add_car_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <EditText android:id="@+id/text_add_car"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="15dp"
+                  android:hint="@string/add_new_car"/>
+
+        <Button android:id="@+id/add_car_submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryLight"
+                android:textColor="@color/white"
+                android:text="@string/add_entry_submit_button"
+                android:layout_below="@+id/text_add_car"
+                android:onClick="submitCar"/>
+
+    </RelativeLayout>
+
+
+    <Button android:id="@+id/add_new_car_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:textColor="@color/white"
+            android:text="@string/add_new_car_button"
+            android:onClick="toggleAddNewCar" />
+
+    <ScrollView android:id="@+id/list_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        <LinearLayout android:id="@+id/list"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:orientation="vertical">
+
+            <LinearLayout android:id="@id/list_subitem"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:paddingTop="50px">
+
+                <TextView android:text="Geo Prizm"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textAlignment="center"
+                          android:textSize="11.5pt"
+                          android:textStyle="bold"
+                          android:textColor="@color/black" />
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

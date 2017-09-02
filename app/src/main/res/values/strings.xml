@@ -3,9 +3,9 @@
         Main view
     -->
     <string name="app_name">Petrol Patrol</string>
-    <string name="option_add_entry">Add Entry</string>
-    <string name="option_view_entries">View Entries</string>
-    <string name="option_switch_cars">Switch Cars</string>
+    <string name="option_add_entry">Add</string>
+    <string name="option_view_entries">View</string>
+    <string name="option_switch_cars">Cars</string>
     <string name="more">More</string>
 
     <!--
@@ -17,11 +17,11 @@
     <string name="text_price_error">Empty price</string>
     <string name="text_gallons_error">Empty gallons</string>
     <string name="text_mileage_error">Empty mileage</string>
-    <string name="text_date">Dates: </string>
-    <string name="text_name">Name: </string>
-    <string name="text_price">Price: </string>
-    <string name="text_gallons">Gallons: </string>
-    <string name="text_mileage">Mileage: </string>
+    <string name="text_date">Dates:</string>
+    <string name="text_name">Name:</string>
+    <string name="text_price">Price:</string>
+    <string name="text_gallons">Gallons:</string>
+    <string name="text_mileage">Mileage:</string>
     <string name="add_entry_submit_button">Submit</string>
     <string name="text_date_edit_checkbox_text">(auto)</string>
     <string name="text_name_edit_checkbox_text">(custom)</string>
@@ -57,14 +57,14 @@
     <string name="toast_submit_message">The entry has been added!</string>
 
     <!--
-        Drawer
+        Switch Cars
     -->
-    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_tabbed">Tabbed</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="switch_cars_title">Switch Cars</string>
+    <string name="add_new_car">Car:</string>
+    <string name="text_car_error">Empty car name</string>
+    <string name="add_new_car_button">Add New Car</string>
+    <string name="delete_warning">Are you sure you want to delete this entry?\nThis will delete ALL previously entered fill ups for this car! Are you sure?</string>
+
 
     <!--
         Toolbar

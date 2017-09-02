@@ -8,4 +8,6 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="grayHighlight">#E9E9E9</color>
+    <color name="greenActive">#AFD191</color>
+    <color name="greenActiveHighlight">#41B838</color>
 </resources>
