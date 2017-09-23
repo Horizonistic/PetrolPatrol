@@ -141,34 +141,6 @@ public class ViewEntries extends AppCompatActivity
                     }
                 };
                 layout.setOnTouchListener(touchListener);
-//                layout.setLongClickable(true);
-//                layout.setOnLongClickListener(new DeleteOnLongClickListener(this.cursor.getInt(this.cursor.getColumnIndex(DatabaseContract.gasTable._ID))));
-
-
-                /*layout.setOnTouchListener(new View.OnTouchListener()
-                {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event)
-                    {
-                        if (event.getAction() == MotionEvent.ACTION_DOWN)
-                        {
-                            layout.setBackgroundColor(colorGrayHighlight);
-                            return false;
-                        }
-                        else if (event.getAction() == MotionEvent.ACTION_UP)
-                        {
-                            layout.setBackgroundColor(colorPrimaryBackground);
-                            return true;
-                        }
-                        else if (event.getAction() == MotionEvent.ACTION_CANCEL)
-                        {
-                            layout.setBackgroundColor(colorPrimaryBackground);
-                            return true;
-                        }
-                        return true;
-                    }
-                });
-                */
 
                 list.addView(layout);
 
