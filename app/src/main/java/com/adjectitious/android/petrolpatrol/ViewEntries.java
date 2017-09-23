@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -111,9 +112,40 @@ public class ViewEntries extends AppCompatActivity
                 LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
                 layout.setLayoutParams(params);
                 layout.setPadding(0, 50, 0, 0);
-                layout.setLongClickable(true);
-                layout.setOnLongClickListener(new DeleteOnLongClickListener(this.cursor.getInt(this.cursor.getColumnIndex(DatabaseContract.gasTable._ID))));
-                layout.setOnTouchListener(new View.OnTouchListener()
+
+                final GestureDetector gestureDetector = new GestureDetector(
+                        this, new DeleteGestureDetector(this.cursor.getInt(this.cursor.getColumnIndex(DatabaseContract.gasTable._ID)))
+                );
+
+                View.OnTouchListener touchListener = new View.OnTouchListener()
+                {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event)
+                    {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN)
+                        {
+                            layout.setBackgroundColor(colorGrayHighlight);
+                            return gestureDetector.onTouchEvent(event);
+                        }
+                        else if (event.getAction() == MotionEvent.ACTION_UP)
+                        {
+                            layout.setBackgroundColor(colorPrimaryBackground);
+                            return gestureDetector.onTouchEvent(event);
+                        }
+                        else if (event.getAction() == MotionEvent.ACTION_CANCEL)
+                        {
+                            layout.setBackgroundColor(colorPrimaryBackground);
+                            return gestureDetector.onTouchEvent(event);
+                        }
+                        return gestureDetector.onTouchEvent(event);
+                    }
+                };
+                layout.setOnTouchListener(touchListener);
+//                layout.setLongClickable(true);
+//                layout.setOnLongClickListener(new DeleteOnLongClickListener(this.cursor.getInt(this.cursor.getColumnIndex(DatabaseContract.gasTable._ID))));
+
+
+                /*layout.setOnTouchListener(new View.OnTouchListener()
                 {
                     @Override
                     public boolean onTouch(View v, MotionEvent event)
@@ -126,11 +158,17 @@ public class ViewEntries extends AppCompatActivity
                         else if (event.getAction() == MotionEvent.ACTION_UP)
                         {
                             layout.setBackgroundColor(colorPrimaryBackground);
-                            return false;
+                            return true;
+                        }
+                        else if (event.getAction() == MotionEvent.ACTION_CANCEL)
+                        {
+                            layout.setBackgroundColor(colorPrimaryBackground);
+                            return true;
                         }
                         return true;
                     }
                 });
+                */
 
                 list.addView(layout);
 
@@ -196,24 +234,32 @@ public class ViewEntries extends AppCompatActivity
         }
     }
 
-    private class DeleteOnLongClickListener implements View.OnLongClickListener
+    protected class DeleteGestureDetector implements GestureDetector.OnGestureListener
     {
-        public DatabaseHelper dbHelper;
-        public SQLiteDatabase db;
         public int position;
 
-        public DeleteOnLongClickListener(int position)
+        public DeleteGestureDetector(int position)
         {
-            this.dbHelper = new DatabaseHelper(getApplicationContext());
-            this.db = this.dbHelper.getWritableDatabase();
             this.position = position;
         }
 
         @Override
-        public boolean onLongClick(View v)
+        public boolean onDown(MotionEvent event) {
+            Log.d(TAG,"onDown: ");
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e)
         {
-            Log.d(ViewEntries.TAG, "onLongClick");
-            // TODO: Add an edit option
+            Log.d(TAG, "onSingleTapUp: ");
+            return true;
+        }
+
+        // todo: add swipe to delete functionality, changes onLongPress to edit
+        @Override
+        public void onLongPress(MotionEvent e) {
+            Log.i(TAG, "onLongPress: ");
             AlertDialog dialog = new AlertDialog.Builder(ViewEntries.this).create();
             dialog.setTitle(R.string.delete_entry_title);
             dialog.setMessage(getString(R.string.delete_entry_prompt));
@@ -227,7 +273,7 @@ public class ViewEntries extends AppCompatActivity
                             String[] values = new String[]{String.valueOf(this.position)};
                             db.delete(DatabaseContract.gasTable.TABLE_NAME, where, values);
                             viewAll();
-                            Log.wtf(ViewEntries.TAG, String.valueOf(this.position));
+                            Log.i(ViewEntries.TAG, "Deleted entry: " + String.valueOf(this.position));
                         }
                     });
 
@@ -240,26 +286,46 @@ public class ViewEntries extends AppCompatActivity
                         }
                     });
             dialog.show();
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        {
+            Log.i(TAG, "onScroll: ");
             return true;
         }
 
-        public class DialogTest implements DialogInterface.OnClickListener
+        // todo: add swipe to delete functionality, changes onLongPress to edit
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY)
         {
-            public DatabaseHelper dbHelper;
-            public SQLiteDatabase db;
-            public int position;
+            Log.d(TAG, "onFling: ");
+            return true;
+        }
 
-            public DialogTest(int position)
-            {
-                this.dbHelper = new DatabaseHelper(getApplicationContext());
-                this.db = this.dbHelper.getWritableDatabase();
-                this.position = position;
-            }
+        @Override
+        public void onShowPress(MotionEvent e)
+        {
+            Log.d(TAG, "onShowPress: ");
+        }
+    }
 
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-            }
+    public class DialogTest implements DialogInterface.OnClickListener
+    {
+        public DatabaseHelper dbHelper;
+        public SQLiteDatabase db;
+        public int position;
+
+        public DialogTest(int position)
+        {
+            this.dbHelper = new DatabaseHelper(getApplicationContext());
+            this.db = this.dbHelper.getWritableDatabase();
+            this.position = position;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which)
+        {
         }
     }
 }

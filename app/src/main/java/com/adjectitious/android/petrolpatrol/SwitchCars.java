@@ -312,7 +312,7 @@ public class SwitchCars extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which)
                         {
-                            // Get the ID of the row to delete to check if it was active, then delete
+                            // Get the ID of the row to delete to check if it was active, then delete from cars and fillups table
                             String[] columnsSelect = new String[]{DatabaseContract.carTable.COLUMN_ACTIVE};
                             String whereDelete = DatabaseContract.carTable._ID + "= ?";
                             String[] valuesDelete = new String[]{String.valueOf(this.position)};
@@ -323,6 +323,7 @@ public class SwitchCars extends AppCompatActivity {
                             int wasActiveCar = cursorDelete.getInt(0);
 
                             db.delete(DatabaseContract.carTable.TABLE_NAME, whereDelete, valuesDelete);
+                            db.delete(DatabaseContract.gasTable.TABLE_NAME, whereDelete, valuesDelete);
 
                             Log.d(SwitchCars.TAG, "Deleting car ID: " + String.valueOf(this.position));
 
