@@ -306,7 +306,14 @@ public class AddEntry extends AppCompatActivity
     private void resetValues()
     {
         EditText date = (EditText) findViewById(R.id.text_date_edit);
-        date.setText("");
+        if (checkBoxState(R.id.text_date_edit_checkbox))
+        {
+            date.setText(getDate());
+        }
+        else
+        {
+            date.setText("");
+        }
         EditText name = (EditText) findViewById(R.id.text_name_edit);
         name.setText("");
         EditText price = (EditText) findViewById(R.id.text_price_edit);
@@ -317,6 +324,11 @@ public class AddEntry extends AppCompatActivity
         mileage.setText("");
     }
 
+    public boolean checkBoxState(int id)
+    {
+        return ((CheckBox) findViewById(id)).isChecked();
+    }
+
     /*
         General CheckBox toggle by passing view
      */
@@ -324,11 +336,11 @@ public class AddEntry extends AppCompatActivity
     {
         CheckBox checkbox = (CheckBox) view;
 
-        switch(checkbox.getId())
+        switch (checkbox.getId())
         {
             // Date toggle
             case R.id.text_date_edit_checkbox:
-                EditText dateEditText = (EditText)findViewById(R.id.text_date_edit);
+                EditText dateEditText = (EditText) findViewById(R.id.text_date_edit);
                 if (checkbox.isChecked())
                 {
                     dateEditText.setFocusableInTouchMode(false);
@@ -345,7 +357,7 @@ public class AddEntry extends AppCompatActivity
 
             // Gas station name toggle
             case R.id.text_name_edit_checkbox:
-                Spinner nameSpinner = (Spinner)findViewById(R.id.spinner_name);
+                Spinner nameSpinner = (Spinner) findViewById(R.id.spinner_name);
                 EditText nameEditText = (EditText) findViewById(R.id.text_name_edit);
                 if (checkbox.isChecked())
                 {
