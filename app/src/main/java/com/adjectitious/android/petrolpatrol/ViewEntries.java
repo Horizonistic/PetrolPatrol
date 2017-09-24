@@ -67,17 +67,58 @@ public class ViewEntries extends AppCompatActivity
     {
         this.dbHelper = new DatabaseHelper(getApplicationContext());
         this.db = this.dbHelper.getWritableDatabase();
+
+        // Get the name and ID of the currently active car
         if (dbHelper.doesTableExist(db, DatabaseContract.gasTable.TABLE_NAME))
         {
             this.cursor = this.db.query(
-                    DatabaseContract.gasTable.TABLE_NAME,               // The table to query
-                    null,                                               // The columns to return
-                    null,                                               // The columns for the WHERE clause
-                    null,                                               // The values for the WHERE clause
+                    DatabaseContract.carTable.TABLE_NAME,               // The table to query
+                    null,                                              // The columns to return
+                    DatabaseContract.carTable.COLUMN_ACTIVE + "=?",                                               // The columns for the WHERE clause
+                    new String[] {"1"},                                               // The values for the WHERE clause
                     null,                                               // don't group the rows
                     null,                                               // don't filter by row groups
                     null                                                // The sort order
             );
+        }
+        else
+        {
+            Log.e(TAG, "Empty car table");
+            return;
+        }
+
+        int activeCarId = 0;
+        TextView activeCarText = new TextView(this.context);
+        if (this.cursor.moveToFirst() && !this.cursor.isAfterLast())
+        {
+            activeCarText.setText(this.cursor.getString(this.cursor.getColumnIndex(DatabaseContract.carTable.COLUMN_NAME_NAME)));
+            activeCarId = this.cursor.getInt(this.cursor.getColumnIndex(DatabaseContract.carTable._ID));
+        }
+        else
+        {
+            activeCarText.setText("Oops");
+        }
+
+        // Loop through all entries for the currently selected car
+        if (dbHelper.doesTableExist(db, DatabaseContract.gasTable.TABLE_NAME))
+        {
+            if (activeCarId != 0)
+            {
+                this.cursor = this.db.query(
+                        DatabaseContract.gasTable.TABLE_NAME,               // The table to query
+                        null,                                               // The columns to return
+                        DatabaseContract.gasTable.COLUMN_NAME_CAR + "=?",                                               // The columns for the WHERE clause
+                        new String[] {String.valueOf(activeCarId)},                                               // The values for the WHERE clause
+                        null,                                               // don't group the rows
+                        null,                                               // don't filter by row groups
+                        null                                                // The sort order
+                );
+            }
+            else
+            {
+                Log.e(TAG, "No active car selected");
+                return;
+            }
         }
         else
         {
@@ -102,15 +143,24 @@ public class ViewEntries extends AppCompatActivity
         }
         LinearLayout list = (LinearLayout) findViewById(R.id.list);
         list.removeAllViews();
+
+        LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        activeCarText.setLayoutParams(layoutParams);
+        activeCarText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        activeCarText.setTextSize(context.getResources().getDimension(R.dimen.header_font_size));
+        activeCarText.setTypeface(null, Typeface.BOLD);
+        activeCarText.setTextColor(colorBlack);
+        activeCarText.setVisibility(View.VISIBLE);
+        list.addView(activeCarText);
         if (this.cursor.moveToFirst())
         {
             while (!this.cursor.isAfterLast())
             {
                 final LinearLayout layout = new LinearLayout(this.context);
+
                 layout.setId(R.id.list_subitem);
                 layout.setOrientation(LinearLayout.VERTICAL);
-                LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                layout.setLayoutParams(params);
+                layout.setLayoutParams(layoutParams);
                 layout.setPadding(0, 50, 0, 0);
 
                 final GestureDetector gestureDetector = new GestureDetector(
@@ -146,7 +196,7 @@ public class ViewEntries extends AppCompatActivity
 
                 // DATE
                 TextView date = new TextView(this.context);
-                date.setLayoutParams(params);
+                date.setLayoutParams(layoutParams);
                 date.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 date.setTextSize(context.getResources().getDimension(R.dimen.header_font_size));
                 date.setTypeface(null, Typeface.BOLD);
@@ -157,7 +207,7 @@ public class ViewEntries extends AppCompatActivity
 
                 // LOCATION
                 TextView location = new TextView(this.context);
-                location.setLayoutParams(params);
+                location.setLayoutParams(layoutParams);
                 location.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 location.setTextSize(context.getResources().getDimension(R.dimen.subitems_font_size));
                 location.setTextColor(colorBlack);
@@ -166,7 +216,7 @@ public class ViewEntries extends AppCompatActivity
 
                 // PRICE
                 TextView price = new TextView(this.context);
-                price.setLayoutParams(params);
+                price.setLayoutParams(layoutParams);
                 price.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 price.setTextSize(context.getResources().getDimension(R.dimen.subitems_font_size));
                 price.setTextColor(colorBlack);
@@ -178,7 +228,7 @@ public class ViewEntries extends AppCompatActivity
 
                 // GALLONS
                 TextView gallons = new TextView(this.context);
-                gallons.setLayoutParams(params);
+                gallons.setLayoutParams(layoutParams);
                 gallons.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 gallons.setTextSize(context.getResources().getDimension(R.dimen.subitems_font_size));
                 gallons.setTextColor(colorBlack);
@@ -191,7 +241,7 @@ public class ViewEntries extends AppCompatActivity
 
                 // MILEAGE
                 TextView mileage = new TextView(this.context);
-                mileage.setLayoutParams(params);
+                mileage.setLayoutParams(layoutParams);
                 mileage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 mileage.setTextSize(context.getResources().getDimension(R.dimen.subitems_font_size));
                 mileage.setTextColor(colorBlack);
